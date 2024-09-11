@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "newscore",
+    "texture": "c11e661e-6c02-42f7-bda5-817130624d3f",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      135,
+      50
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      135,
+      50
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "按钮-选中",
+    "texture": "3349b829-b393-4d06-9c82-2ecfdb63584d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      100,
+      81
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      100,
+      81
+    ],
+    "capInsets": [
+      12,
+      12,
+      12,
+      12
+    ]
+  }
+}
