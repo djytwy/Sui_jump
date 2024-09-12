@@ -36,22 +36,18 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
-
         labelScore: {
             default: null,
             type: cc.Label,
         },
-
         labelScoreMax: {
             default: null,
             type: cc.Label,
         },
-
         screenLeaderboard: {
             default: null,
             type: require('ScreenLeaderboard'),
         },
-
         btnHome: {
             default: null,
             type: cc.Button
@@ -61,6 +57,14 @@ cc.Class({
             type: cc.Button
         },
         btnPlayAgain: {
+            default: null,
+            type: cc.Button
+        },
+        btnCopyBlobId: {
+            default: null,
+            type: cc.Button
+        },
+        btnCopyId: {
             default: null,
             type: cc.Button
         },
@@ -83,7 +87,9 @@ cc.Class({
         errorTips: {
             default: null,
             type: cc.Label,
-        }
+        },
+        blobIdString: "",
+        SuiIdString: ""
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -102,6 +108,8 @@ cc.Class({
         this.btnPlayAgain.node.active = true;
         this.labelScore.node.active = true;
         this.loading.node.active = false;
+        this.btnCopyBlobId.node.active = false;
+        this.btnCopyId.node.active = false;
         // upload status:
         this.blobId.node.active = false;
         this.SuiId.node.active = false;
@@ -169,15 +177,20 @@ cc.Class({
         if (res.status === 200) {
             const data = await res.json();
             console.log(data);
+            this.successTips.string = 'Upload Success!'
             this.blobId.string = 'Blodid: ' + data.newlyCreated.blobObject.blobId;
             this.SuiId.string = 'Id: ' + data.newlyCreated.blobObject.id;
+            this.blobIdString = data.newlyCreated.blobObject.blobId;
+            this.SuiIdString = data.newlyCreated.blobObject.id;
             this.blobId.node.active = true;
             this.SuiId.node.active = true;
             this.successTips.node.active = true;
             this.loading.node.active = false;
             this.btnHome.node.active = true;
-            this.btnUpload.node.active = true;
             this.btnPlayAgain.node.active = true;
+
+            this.btnCopyBlobId.node.active = true;
+            this.btnCopyId.node.active = true;
 
             var uploadNum = window.localStorage.getItem("uploadNum") ? window.localStorage.getItem("uploadNum") : 0
             window.localStorage.setItem("uploadNum", parseInt(uploadNum) + 1)
@@ -210,5 +223,27 @@ cc.Class({
             const errorData = await res.text();
             console.error('Error details:', errorData);
         }
+    },
+
+    async onBtnCopyBlobIdClick() {
+        window.navigator.clipboard
+            .writeText(this.blobIdString)
+            .then(() => {
+                this.successTips.string = 'Copy Blob ID Success!'
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    },
+
+    async onBtnCopyIdClick() {
+        window.navigator.clipboard
+            .writeText(this.SuiIdString)
+            .then(() => {
+                this.successTips.string = 'Copy ID Success !'
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 });

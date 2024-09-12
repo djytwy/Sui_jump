@@ -68,6 +68,14 @@ cc.Class({
       "default": null,
       type: cc.Button
     },
+    btnCopyBlobId: {
+      "default": null,
+      type: cc.Button
+    },
+    btnCopyId: {
+      "default": null,
+      type: cc.Button
+    },
     loading: {
       "default": null,
       type: cc.Label
@@ -87,7 +95,9 @@ cc.Class({
     errorTips: {
       "default": null,
       type: cc.Label
-    }
+    },
+    blobIdString: "",
+    SuiIdString: ""
   },
   // LIFE-CYCLE CALLBACKS:
   // onLoad () {},
@@ -98,7 +108,9 @@ cc.Class({
     this.btnUpload.node.active = true;
     this.btnPlayAgain.node.active = true;
     this.labelScore.node.active = true;
-    this.loading.node.active = false; // upload status:
+    this.loading.node.active = false;
+    this.btnCopyBlobId.node.active = false;
+    this.btnCopyId.node.active = false; // upload status:
 
     this.blobId.node.active = false;
     this.SuiId.node.active = false;
@@ -161,7 +173,7 @@ cc.Class({
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 27;
+                _context.next = 31;
                 break;
               }
 
@@ -171,15 +183,19 @@ cc.Class({
             case 12:
               data = _context.sent;
               console.log(data);
+              _this.successTips.string = 'Upload Success!';
               _this.blobId.string = 'Blodid: ' + data.newlyCreated.blobObject.blobId;
               _this.SuiId.string = 'Id: ' + data.newlyCreated.blobObject.id;
+              _this.blobIdString = data.newlyCreated.blobObject.blobId;
+              _this.SuiIdString = data.newlyCreated.blobObject.id;
               _this.blobId.node.active = true;
               _this.SuiId.node.active = true;
               _this.successTips.node.active = true;
               _this.loading.node.active = false;
               _this.btnHome.node.active = true;
-              _this.btnUpload.node.active = true;
               _this.btnPlayAgain.node.active = true;
+              _this.btnCopyBlobId.node.active = true;
+              _this.btnCopyId.node.active = true;
               uploadNum = window.localStorage.getItem("uploadNum") ? window.localStorage.getItem("uploadNum") : 0;
               window.localStorage.setItem("uploadNum", parseInt(uploadNum) + 1);
               /**
@@ -200,29 +216,73 @@ cc.Class({
                   }
                */
 
-              _context.next = 37;
+              _context.next = 41;
               break;
 
-            case 27:
+            case 31:
               _this.errorTips.node.active = true;
               _this.btnHome.node.active = true;
               _this.btnUpload.node.active = true;
               _this.btnPlayAgain.node.active = true;
               _this.loading.node.active = false;
               console.error('Error:', res.status);
-              _context.next = 35;
+              _context.next = 39;
               return res.text();
 
-            case 35:
+            case 39:
               errorData = _context.sent;
               console.error('Error details:', errorData);
 
-            case 37:
+            case 41:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
+    }))();
+  },
+  onBtnCopyBlobIdClick: function onBtnCopyBlobIdClick() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              window.navigator.clipboard.writeText(_this2.blobIdString).then(function () {
+                _this2.successTips.string = 'Copy Blob ID Success!';
+              })["catch"](function (e) {
+                console.log(e);
+              });
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  onBtnCopyIdClick: function onBtnCopyIdClick() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              window.navigator.clipboard.writeText(_this3.SuiIdString).then(function () {
+                _this3.successTips.string = 'Copy ID Success !';
+              })["catch"](function (e) {
+                console.log(e);
+              });
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
     }))();
   }
 });

@@ -5,8 +5,8 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": -45,
-      "y": -964,
+      "x": 1,
+      "y": 91,
       "width": 1512,
       "height": 944,
       "layout": {
@@ -104,7 +104,7 @@
         "cocos-services"
       ]
     },
-    "window-1726112044607": {}
+    "window-1726125787458": {}
   },
   "panels": {
     "sprite-editor": {
@@ -118,6 +118,12 @@
       "y": 108,
       "width": 500,
       "height": 728
+    },
+    "project-settings": {
+      "x": 476,
+      "y": 208,
+      "width": 584,
+      "height": 554
     }
   },
   "panelLabelWidth": {}
