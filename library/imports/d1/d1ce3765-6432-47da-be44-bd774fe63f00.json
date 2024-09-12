@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "skinTips",
+    "texture": "e965a5c7-1b24-4a1e-82ea-6e8d2bf7c661",
+    "atlas": "",
+    "rect": [
+      10,
+      10,
+      422,
+      52
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      442,
+      72
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

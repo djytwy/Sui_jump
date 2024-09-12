@@ -130,8 +130,6 @@ cc.Class({
     },
 
     onBtnClickHome() {
-        console.log('home.......');
-
         ScreenMgr.instance.showScreen('ScreenHome');
         this.node.active = false;
     },
@@ -157,7 +155,6 @@ cc.Class({
     async onBtnClickUpload() {
         this.errorTips.node.active = false;
         var imageBase64 = UtilsCommon.getScreenshotBase64(UtilsCommon.getCameraMain());
-        console.log(imageBase64);
 
         this.btnHome.node.active = false;
         this.btnUpload.node.active = false;
@@ -181,6 +178,9 @@ cc.Class({
             this.btnHome.node.active = true;
             this.btnUpload.node.active = true;
             this.btnPlayAgain.node.active = true;
+
+            var uploadNum = window.localStorage.getItem("uploadNum") ? window.localStorage.getItem("uploadNum") : 0
+            window.localStorage.setItem("uploadNum", parseInt(uploadNum) + 1)
             /**
              * {
                     newlyCreated: {

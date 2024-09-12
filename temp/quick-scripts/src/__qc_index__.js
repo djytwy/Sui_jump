@@ -12,7 +12,6 @@ require('./assets/scripts/ScreenHomeLeaderboard');
 require('./assets/scripts/ScreenLeaderboard');
 require('./assets/scripts/ScreenMgr');
 require('./assets/scripts/ScreenSkinShop');
-require('./assets/scripts/ScreenUpload');
 require('./assets/scripts/SkinItem');
 require('./assets/scripts/SkinMgr');
 require('./assets/scripts/UtilsCommon');

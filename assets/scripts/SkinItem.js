@@ -42,24 +42,24 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
+    onLoad() {
         this.node.on('click', this.onBtnClick, this);
         this.unlockCount = 0;
         this.unlocked = true;
     },
 
-    start () {
+    start() {
 
     },
 
     // update (dt) {},
-    init: function(skinSpriteFrame, choosed, unlockCount) {
+    init: function (skinSpriteFrame, choosed, unlockCount) {
         this.skin.spriteFrame = skinSpriteFrame;
         this.spriteChoose.spriteFrame = choosed ? this.spriteFrameChoose : this.spriteFrameUnchoose;
         this.unlockCount = unlockCount;
     },
 
-    onBtnClick: function() {
+    onBtnClick: function () {
         if (this.unlocked) {
             this.onChoose();
         } else {
@@ -67,25 +67,38 @@ cc.Class({
         }
     },
 
-    onChoose: function() {
+    onChoose: function () {
         this.spriteChoose.spriteFrame = this.spriteFrameChoose;
         screenSkinShop.instance.onChoose(this.node.getSiblingIndex());
     },
 
-    onUnchoose: function() {
+    onUnchoose: function () {
         this.spriteChoose.spriteFrame = this.spriteFrameUnchoose;
     },
 
     updateLockState() {
-        let invitedCount = SkinMgr.instance.getInvitedCount()
+        // let invitedCount = SkinMgr.instance.getInvitedCount()
 
-        if (invitedCount >= this.unlockCount) {
+        // if (invitedCount >= this.unlockCount) {
+        //     this.unlocked = true;
+        //     this.labelInviteCount.node.active = false;
+        // } else {
+        //     this.unlocked = false;
+        //     this.labelInviteCount.node.active = true;
+        //     this.labelInviteCount.string = invitedCount + "/" + this.unlockCount;
+        // }
+
+        // return this.unlocked;
+
+        let uploadCount = window.localStorage.getItem("uploadNum") ? parseInt(window.localStorage.getItem("uploadNum")) : 0
+
+        if (uploadCount >= this.unlockCount) {
             this.unlocked = true;
             this.labelInviteCount.node.active = false;
         } else {
             this.unlocked = false;
             this.labelInviteCount.node.active = true;
-            this.labelInviteCount.string = invitedCount + "/" + this.unlockCount;
+            this.labelInviteCount.string = uploadCount + "/" + this.unlockCount;
         }
 
         return this.unlocked;

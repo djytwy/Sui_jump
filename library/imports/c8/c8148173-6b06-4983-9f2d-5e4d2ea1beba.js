@@ -69,15 +69,25 @@ cc.Class({
     this.spriteChoose.spriteFrame = this.spriteFrameUnchoose;
   },
   updateLockState: function updateLockState() {
-    var invitedCount = SkinMgr.instance.getInvitedCount();
+    // let invitedCount = SkinMgr.instance.getInvitedCount()
+    // if (invitedCount >= this.unlockCount) {
+    //     this.unlocked = true;
+    //     this.labelInviteCount.node.active = false;
+    // } else {
+    //     this.unlocked = false;
+    //     this.labelInviteCount.node.active = true;
+    //     this.labelInviteCount.string = invitedCount + "/" + this.unlockCount;
+    // }
+    // return this.unlocked;
+    var uploadCount = window.localStorage.getItem("uploadNum") ? parseInt(window.localStorage.getItem("uploadNum")) : 0;
 
-    if (invitedCount >= this.unlockCount) {
+    if (uploadCount >= this.unlockCount) {
       this.unlocked = true;
       this.labelInviteCount.node.active = false;
     } else {
       this.unlocked = false;
       this.labelInviteCount.node.active = true;
-      this.labelInviteCount.string = invitedCount + "/" + this.unlockCount;
+      this.labelInviteCount.string = uploadCount + "/" + this.unlockCount;
     }
 
     return this.unlocked;

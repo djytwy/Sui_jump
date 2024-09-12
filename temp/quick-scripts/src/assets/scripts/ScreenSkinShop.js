@@ -52,7 +52,7 @@ var ScreenSkinShop = cc.Class({
     this.skinItemPool = new cc.NodePool('SkinItem');
   },
   start: function start() {
-    var unlockCountArray = [0, 1, 2, 5];
+    var unlockCountArray = [0, 1, 5, 10];
 
     for (var i = 0; i < SkinMgr.instance.getSkinSpriteFrameCount(); i++) {
       var skinSpriteFrame = SkinMgr.instance.getSkinSpriteFrame(i);
@@ -64,11 +64,10 @@ var ScreenSkinShop = cc.Class({
       if (i < unlockCountArray.length) {
         unlockCount = unlockCountArray[i];
       } else {
-        unlockCount = unlockCountArray[unlockCountArray.length - 1] + (i - unlockCountArray.length + 1) * 5;
-      } // skinItem.init(skinSpriteFrame, choosed, unlockCount);
+        unlockCount = unlockCountArray[unlockCountArray.length - 1] + (i - unlockCountArray.length + 1) * 10;
+      }
 
-
-      skinItem.init(skinSpriteFrame, choosed, 0);
+      skinItem.init(skinSpriteFrame, choosed, unlockCount); // skinItem.init(skinSpriteFrame, choosed, 0);
     }
 
     this.updateLockState();

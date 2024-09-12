@@ -120,7 +120,6 @@ cc.Class({
     });
   },
   onBtnClickHome: function onBtnClickHome() {
-    console.log('home.......');
     ScreenMgr.instance.showScreen('ScreenHome');
     this.node.active = false;
   },
@@ -141,36 +140,35 @@ cc.Class({
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var imageBase64, res, data, errorData;
+      var imageBase64, res, data, uploadNum, errorData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _this.errorTips.node.active = false;
               imageBase64 = UtilsCommon.getScreenshotBase64(UtilsCommon.getCameraMain());
-              console.log(imageBase64);
               _this.btnHome.node.active = false;
               _this.btnUpload.node.active = false;
               _this.btnPlayAgain.node.active = false;
               _this.loading.node.active = true;
-              _context.next = 9;
+              _context.next = 8;
               return fetch('https://publisher-devnet.walrus.space/v1/store?epochs=1', {
                 method: 'PUT',
                 body: base64ToBinary(imageBase64)
               });
 
-            case 9:
+            case 8:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 26;
+                _context.next = 27;
                 break;
               }
 
-              _context.next = 13;
+              _context.next = 12;
               return res.json();
 
-            case 13:
+            case 12:
               data = _context.sent;
               console.log(data);
               _this.blobId.string = 'Blodid: ' + data.newlyCreated.blobObject.blobId;
@@ -182,6 +180,8 @@ cc.Class({
               _this.btnHome.node.active = true;
               _this.btnUpload.node.active = true;
               _this.btnPlayAgain.node.active = true;
+              uploadNum = window.localStorage.getItem("uploadNum") ? window.localStorage.getItem("uploadNum") : 0;
+              window.localStorage.setItem("uploadNum", parseInt(uploadNum) + 1);
               /**
                * {
                       newlyCreated: {
@@ -200,24 +200,24 @@ cc.Class({
                   }
                */
 
-              _context.next = 36;
+              _context.next = 37;
               break;
 
-            case 26:
+            case 27:
               _this.errorTips.node.active = true;
               _this.btnHome.node.active = true;
               _this.btnUpload.node.active = true;
               _this.btnPlayAgain.node.active = true;
               _this.loading.node.active = false;
               console.error('Error:', res.status);
-              _context.next = 34;
+              _context.next = 35;
               return res.text();
 
-            case 34:
+            case 35:
               errorData = _context.sent;
               console.error('Error details:', errorData);
 
-            case 36:
+            case 37:
             case "end":
               return _context.stop();
           }
